@@ -6,7 +6,7 @@ import (
 )
 
 // Migrate the schema of database if needed
-func connectMySQL(user string, pass string, host string, port string, name string) error {
+func connectMySQL(user string, pass string, host string, port string, name string, dblog bool) error {
 	var job models.Job
 	var sched models.Schedule
 	utils.SetConnection(
@@ -15,6 +15,7 @@ func connectMySQL(user string, pass string, host string, port string, name strin
 		host,
 		port,
 		name,
+		dblog,
 	)
 	db, err := utils.GetDB()
 	if err != nil {
@@ -26,8 +27,8 @@ func connectMySQL(user string, pass string, host string, port string, name strin
 }
 
 
-func GetQueue(user string, pass string, host string, port string, name string) (*ConsumerGroup, error) {
-	err := connectMySQL(user, pass, host, port, name)
+func GetQueue(user string, pass string, host string, port string, name string, dblog bool) (*ConsumerGroup, error) {
+	err := connectMySQL(user, pass, host, port, name, dblog)
 	if err != nil {
 		return nil, err
 	}

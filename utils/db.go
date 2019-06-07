@@ -14,6 +14,7 @@ type Connection struct {
 	Host string
 	Port string
 	Name string
+	LogMode bool
 }
 
 var dbConnection *Connection
@@ -33,13 +34,14 @@ func (c *Connection) getDSN() string {
 		c.Name)
 }
 
-func SetConnection(user string, pass string, host string, port string, name string) {
+func SetConnection(user string, pass string, host string, port string, name string, log bool) {
 	dbConnection = &Connection{
 		user,
 		pass,
 		host,
 		port,
 		name,
+		log,
 	}
 }
 
@@ -51,7 +53,7 @@ func newDB() (db *gorm.DB, err error) {
 		return
 	}
 	db.DB().SetMaxIdleConns(10)
-	db.LogMode(true)
+	db.LogMode(dbConnection.LogMode)
 	return
 }
 
