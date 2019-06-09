@@ -26,7 +26,6 @@ func connectMySQL(user string, pass string, host string, port string, name strin
 	return nil
 }
 
-
 func GetQueue(user string, pass string, host string, port string, name string, dblog bool) (*ConsumerGroup, error) {
 	err := connectMySQL(user, pass, host, port, name, dblog)
 	if err != nil {

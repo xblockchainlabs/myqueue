@@ -9,11 +9,11 @@ import (
 )
 
 type Connection struct {
-	User string
-	Pass string
-	Host string
-	Port string
-	Name string
+	User    string
+	Pass    string
+	Host    string
+	Port    string
+	Name    string
 	LogMode bool
 }
 

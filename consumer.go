@@ -15,7 +15,7 @@ type ConsumerGroup struct {
 
 func NewCG() *ConsumerGroup {
 	cg := &ConsumerGroup{started: false}
-  return cg
+	return cg
 }
 
 func (cg *ConsumerGroup) AddWorker(name string, size int, backoff *utils.Backoff, workerFunc WorkerFunc) error {
@@ -31,10 +31,10 @@ func (cg *ConsumerGroup) AddWorker(name string, size int, backoff *utils.Backoff
 }
 
 func (cg *ConsumerGroup) Start() {
-  cg.once.Do(func() {
-  	for _, wp := range cg.workerPools {
-  		wp.Start(Allocator, Collector)
-  	}
-    cg.started = true
-  })
+	cg.once.Do(func() {
+		for _, wp := range cg.workerPools {
+			wp.Start(Allocator, Collector)
+		}
+		cg.started = true
+	})
 }
