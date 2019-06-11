@@ -1,5 +1,7 @@
 github.com/go-sql-driver/mysql v0.0.0-20190315223236-1fbca2aabb09 h1:kuJiBi07Maim1e0/rUElKrM7ybjk0DjHkI28LQLhBWs=
 github.com/go-sql-driver/mysql v0.0.0-20190315223236-1fbca2aabb09/go.mod h1:zAC/RDZ24gD3HViQzih4MyKcchzm+sOG5ZlKdlhCg5w=
+github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b h1:VKtxabqXZkF25pY9ekfRL6a582T4P37/31XEstQ5p58=
+github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b/go.mod h1:SBH7ygxi8pfUlaOkMMuAQtPIUF8ecWP5IEl/CR7VP2Q=
 github.com/jinzhu/gorm v0.0.0-20190210073940-906799fef2f8 h1:wafUzjdiNAm+eEcR2EBIrZbs/rwmnetsTbwD1m4+2L0=
 github.com/jinzhu/gorm v0.0.0-20190210073940-906799fef2f8/go.mod h1:Vla75njaFJ8clLU1W44h34PjIkijhjHIYnZxMqCdxqo=
 github.com/jinzhu/inflection v0.0.0-20180308033659-04140366298a h1:eeaG9XMUvRBYXJi4pg1ZKM7nxc5AfXfojeLLW7O5J3k=

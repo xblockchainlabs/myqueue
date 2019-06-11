@@ -1,7 +1,6 @@
 package myqueue
 
 import (
-	"fmt"
 	"sync"
 	"time"
 
@@ -41,7 +40,7 @@ type Pool struct {
 
 // NewManager returns a new manager structure ready to be used.
 func NewPool(name string, backoff *utils.Backoff, size int, procFunc ProcessorFunc) *Pool {
-	fmt.Print("Creating a new Pool")
+	utils.InfoLog("Creating a new Pool")
 	r := &Pool{
 		backoff:  backoff,
 		name:     name,
@@ -60,7 +59,7 @@ func (m *Pool) setChannels() {
 }
 
 func (m *Pool) Start(allocFunc AllocationFunc, resultFunc ResultFunc) {
-	fmt.Println("worker pool starting\n")
+	utils.InfoLogf("worker pool starting\n")
 	go m.allocate(allocFunc)
 	m.done = make(chan bool)
 	go m.collect(resultFunc)
@@ -74,17 +73,16 @@ func (m *Pool) Start(allocFunc AllocationFunc, resultFunc ResultFunc) {
 func (m *Pool) allocate(alloc AllocationFunc) {
 	defer close(m.tasks)
 	tasks := alloc(m.name, m.size)
-	fmt.Printf("Allocating [%d] resources\n", len(tasks))
+	utils.InfoLogf("Allocating [%d] resources\n", len(tasks))
 	for _, t := range tasks {
-		fmt.Printf("\n\n--- resources %#v", t)
 		m.tasks <- t
 	}
-	fmt.Println("Done Allocating.")
+	utils.InfoLogf("Done Allocating.")
 }
 
 func (m *Pool) work(wg *sync.WaitGroup) {
 	defer wg.Done()
-	fmt.Print("goRoutine work starting\n")
+	utils.InfoLog("goRoutine work starting\n")
 	to := make(chan string, 1)
 	go func() {
 		time.Sleep(1 * time.Second)
@@ -99,36 +97,34 @@ func (m *Pool) work(wg *sync.WaitGroup) {
 
 		}
 		m.results <- m.procFunc(t)
-		fmt.Print("goRoutine work done.\n")
+		utils.InfoLog("goRoutine work done.\n")
 	}
 }
 
 // workerPool creates or spawns new "work" goRoutines
 func (m *Pool) workerPool() {
 	defer close(m.results)
-	fmt.Printf("Worker Pool spawning new goRoutines, total: [%d]", m.size)
+	utils.InfoLogf("Worker Pool spawning new goRoutines, total: [%d]", m.size)
 	var wg sync.WaitGroup
 	for i := 0; i < m.size; i++ {
 		wg.Add(1)
 		go m.work(&wg)
-		fmt.Printf("Spawned work goRoutine [%d]", i)
 	}
-	fmt.Print("Worker Pool done spawning work goRoutines")
 	wg.Wait()
-	fmt.Print("all work goroutines done processing")
+	utils.InfoLog("all work goroutines done processing")
 }
 
 // Collect post processes the channel "Results" and for further processing
 func (m *Pool) collect(resultFunc ResultFunc) {
-	fmt.Print("goRoutine collect starting")
+	utils.InfoLog("goRoutine collect starting")
 	for r := range m.results {
 		if !r.isEmpty() {
 			if r.Err != nil {
-				fmt.Printf("Job with id: [%d] got an Error: %s", r.Task.ID, r.Err)
+				utils.ErrorLogf("Job with id: [%d] got an Error: %s", r.Task.ID, r.Err)
 			}
 			resultFunc(r.Task, m.backoff, r.Ok)
 		}
 	}
-	fmt.Print("goRoutine collect done, setting channel done as completed")
+	utils.InfoLog("goRoutine collect done, setting channel done as completed")
 	m.done <- true
 }

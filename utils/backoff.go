@@ -64,14 +64,18 @@ func (b *Backoff) getConstanDelay() (delay time.Duration) {
 }
 
 func (b *Backoff) getGeometricDelay(attempt int) (delay time.Duration) {
-	fMult, fAttempt := float64(b.mult), float64(attempt)
-	delay = b.delays[0] * time.Duration(math.Pow(fMult, fAttempt))
+	if attempt > 0 {
+		fMult, fAttempt := float64(b.mult), float64(attempt-1)
+		delay = b.delays[0] * time.Duration(math.Pow(fMult, fAttempt))
+	} else {
+		delay = b.delays[0]
+	}
 	return
 }
 
 func (b *Backoff) getListDelay(attempt int) (delay time.Duration) {
-	if attempt < len(b.delays) {
-		delay = b.delays[attempt]
+	if attempt > 0 && attempt < len(b.delays) {
+		delay = b.delays[attempt-1]
 	} else {
 		delay = 0 * time.Second
 	}

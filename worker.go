@@ -2,7 +2,6 @@ package myqueue
 
 import (
 	"errors"
-	"fmt"
 	"time"
 
 	"github.com/xblockchainlabs/myqueue/models"
@@ -13,9 +12,9 @@ type WorkerFunc func([]byte) (done bool, err error)
 
 func Allocator(name string, size int) (sechds []models.Schedule) {
 	sechds, err := models.SelectJob(name, size)
-	fmt.Printf("Schedules %#v", sechds)
+	utils.InfoLogf("Schedules %#v\n", sechds)
 	if err != nil {
-		fmt.Printf("Allocation Error: %s", err)
+		utils.ErrorLogf("Allocation Error: %s\n", err)
 	}
 	return
 }
@@ -37,6 +36,11 @@ func Collector(sched models.Schedule, backoff *utils.Backoff, ok bool) {
 
 func procClosure(worker WorkerFunc) ProcessorFunc {
 	return func(s models.Schedule) (result Result) {
+		defer func() {
+			if r := recover(); r != nil {
+				utils.FatalLog(r)
+			}
+		}()
 		ok, _ := models.AcquireJob(s.ID)
 		if !ok {
 			result = Result{}

@@ -17,6 +17,7 @@ func connectMySQL(user string, pass string, host string, port string, name strin
 		name,
 		dblog,
 	)
+	utils.SetLogger(dblog)
 	db, err := utils.GetDB()
 	if err != nil {
 		return err
