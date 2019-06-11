@@ -54,7 +54,6 @@ func (b *Backoff) GetDelay(attempt int) (delay time.Duration) {
 	default:
 		delay = 0 * time.Second
 	}
-
 	return
 }
 

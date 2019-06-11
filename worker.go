@@ -41,6 +41,7 @@ func procClosure(worker WorkerFunc) ProcessorFunc {
 				utils.FatalLog(r)
 			}
 		}()
+		result = Result{s, false, nil}
 		ok, _ := models.AcquireJob(s.ID)
 		if !ok {
 			result = Result{}
@@ -48,7 +49,8 @@ func procClosure(worker WorkerFunc) ProcessorFunc {
 		}
 		job := s.Job
 		done, err := worker(job.Params)
-		result = Result{s, done, err}
+		result.Ok = done
+		result.Err = err
 		return
 	}
 }
