@@ -20,7 +20,7 @@ func (t *Tx) Close() {
 			utils.InfoLogf("Transaction (%s) is rolled back \n", t.name)
 			t.tx.Rollback()
 		} else {
-			utils.InfoLogf("Transaction (%s) is commited \n", t.name)
+			utils.InfoLogf("Transaction (%s) is committed \n", t.name)
 			t.tx.Commit()
 		}
 	})
