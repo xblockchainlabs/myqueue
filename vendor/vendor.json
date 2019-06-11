@@ -9,8 +9,20 @@
 			"revisionTime": "2019-03-15T22:32:36Z"
 		},
 		{
+			"checksumSHA1": "yUc84k7cfnRi9AlPFuRo77Y18Og=",
+			"path": "github.com/golang/glog",
+			"revision": "23def4e6c14b4da8ac2ed8007337bc5eb5007998",
+			"revisionTime": "2016-01-25T20:49:56Z"
+		},
+		{
 			"checksumSHA1": "9uVAzX+R7ajNM35CIdkg+vlSbH4=",
 			"path": "github.com/jinzhu/gorm",
+			"revision": "906799fef2f895116d915e1793314ab9053b400d",
+			"revisionTime": "2019-02-10T07:39:40Z"
+		},
+		{
+			"checksumSHA1": "u+4Y3GNnV4CknfqKkFfQFv21Sl0=",
+			"path": "github.com/jinzhu/gorm/dialects/mssql",
 			"revision": "906799fef2f895116d915e1793314ab9053b400d",
 			"revisionTime": "2019-02-10T07:39:40Z"
 		},
@@ -21,10 +33,46 @@
 			"revisionTime": "2019-02-10T07:39:40Z"
 		},
 		{
+			"checksumSHA1": "0Pry12nZ6UQBd1iXEtszySSfFpI=",
+			"path": "github.com/jinzhu/gorm/dialects/postgres",
+			"revision": "906799fef2f895116d915e1793314ab9053b400d",
+			"revisionTime": "2019-02-10T07:39:40Z"
+		},
+		{
+			"checksumSHA1": "4VZ1gLZHMumRjV3fclS1aX8S1aQ=",
+			"path": "github.com/jinzhu/gorm/dialects/sqlite",
+			"revision": "906799fef2f895116d915e1793314ab9053b400d",
+			"revisionTime": "2019-02-10T07:39:40Z"
+		},
+		{
 			"checksumSHA1": "4eelJOSLZoDzLuaJvgilOBVNovU=",
 			"path": "github.com/jinzhu/inflection",
 			"revision": "04140366298a54a039076d798123ffa108fff46c",
 			"revisionTime": "2018-03-08T03:36:59Z"
+		},
+		{
+			"checksumSHA1": "TKjKX4/S5O2dYR1gIA3jSURtyKs=",
+			"path": "github.com/lib/pq",
+			"revision": "d6156e141ac6c06345c7c73f450987a9ed4b751f",
+			"revisionTime": "2019-03-26T04:20:56Z"
+		},
+		{
+			"checksumSHA1": "BC9Ng4sUc0Nq7ICgwsAzNwUT9A8=",
+			"path": "github.com/lib/pq/hstore",
+			"revision": "d6156e141ac6c06345c7c73f450987a9ed4b751f",
+			"revisionTime": "2019-03-26T04:20:56Z"
+		},
+		{
+			"checksumSHA1": "ATnwV0POluBNQEMjPdylodz0oK0=",
+			"path": "github.com/lib/pq/oid",
+			"revision": "d6156e141ac6c06345c7c73f450987a9ed4b751f",
+			"revisionTime": "2019-03-26T04:20:56Z"
+		},
+		{
+			"checksumSHA1": "RYKZaEgXj3NedzLmd96Hd+xQRdg=",
+			"path": "github.com/mattn/go-sqlite3",
+			"revision": "3fa1c550ffa69b74dc4bfd5109b4e218f32c87cf",
+			"revisionTime": "2019-01-04T16:17:12Z"
 		}
 	],
 	"rootPath": "github.com/xblockchainlabs/myqueue"
