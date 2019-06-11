@@ -1,7 +1,6 @@
 package myqueue
 
 import (
-	"fmt"
 	"sync"
 	"time"
 
@@ -91,11 +90,9 @@ func (m *Pool) work(wg *sync.WaitGroup) {
 	}()
 	select {
 	case <-to:
-		fmt.Println("It's timedout")
 		m.results <- Result{}
 	case t := <-m.tasks:
 		if t.IsEmpty() {
-			fmt.Println("It's empty")
 			m.results <- Result{}
 
 		}
@@ -126,8 +123,6 @@ func (m *Pool) collect(resultFunc ResultFunc) {
 				utils.ErrorLogf("Job with id: [%d] got an Error: %s", r.Task.ID, r.Err)
 			}
 			resultFunc(r.Task, m.backoff, r.Ok)
-		} else {
-			fmt.Println("Result is empty")
 		}
 	}
 	utils.InfoLog("goRoutine collect done, setting channel done as completed")
